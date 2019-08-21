@@ -1,0 +1,50 @@
+bind main B !git rebase -i %(commit)
+bind status A !git commit --amend
+bind status S !?git stash
+
+bind generic <C-J> :script ~/.tigdown
+bind generic <C-K> :script ~/.tigup
+
+bind generic <Ctrl-U> :move-half-page-up
+bind generic <Ctrl-D> :move-half-page-down
+
+bind generic 0 move-first-line
+bind generic G move-last-line
+bind status G move-last-line
+bind main G move-last-line
+
+bind stage	2	:?^@@
+bind stage	3	:/^@@
+bind diff	2	:?^@@
+bind diff	3	:/^@@
+
+set diff-view	= line-number:yes,interval=1 text:yes,commit-title-overflow=no
+set stage-view	= line-number:yes,interval=1 text
+set blob-view	= line-number:yes,interval=1 text
+
+#bind generic U !stty sane
+
+set main-view = date id author commit-title:graph=v2,refs
+
+set diff-options = --histogram
+
+set refresh-mode = auto
+
+set mouse = true
+
+# Main view colors
+color graph-commit      blue  black bold
+color date              blue  black bold
+
+# Diff colors
+color diff-header       39  black bold
+color diff-index        39  black bold
+color diff-oldmode      39  black bold
+color diff-newmode      39  black bold
+color diff-stat         white black bold
+color "Commit: "        green black
+color "CommitDate: "    green black
+color "Author: "        green black
+color "AuthorDate: "    green black
+color diff-add          green 235 bold
+color diff-del          196 235 bold
