@@ -16,10 +16,10 @@ set number
 set numberwidth=5
 set viminfo='1000,f1,<500,:1000,/1000
 set hlsearch
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
+set backupdir=~/.nvim/backup//
+set directory=~/.nvim/swap//
 set udf
-set udir=~/.vim/undo//
+set udir=~/.nvim/undo//
 " Super short timeout for keycode sequences. For local development, 3ms is
 " plenty of time to send an escape code, but prevents quick <esc><key> sequences
 " from being interpreted as <meta-key>
@@ -33,7 +33,10 @@ autocmd!
 " set rtp+=~/.nvim/bundle/rust.vim
 " set rtp+=~/.nvim/bundle/vim-glsl
 
+" OS X
 set rtp+=/usr/local/opt/fzf
+" Linux
+set rtp+=/usr/share/doc/fzf/examples
 set rtp+=~/prog/fzf.vim/
 
 " Why aren't these happening in the above bundles?
@@ -105,7 +108,6 @@ nmap <C-B> :exec "normal 0".(g:break_column)."lF r\rli\e"<CR>
 " spacebar toggles folds in normal
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
 " Window stuff
-map <C-Q> <C-W>t
 map <C-A> <C-W>p
 " nmap ˙ <C-W>h
 " nmap ∆ <C-W>j
@@ -202,16 +204,17 @@ let g:Term_InsertOnEnter=1
 
 function! TermInsert()
     if exists("b:terminal_job_id")
-        if g:Term_InsertOnEnter == 1
+        if g:Term_InsertOnEnter == 1 || (exists("b:Term_InsertOnEnter") && b:Term_InsertOnEnter == 1)
             startinsert
         endif
-        let g:Term_InsertOnEnter=1
+        let g:Term_InsertOnEnter=0
     endif
 endfunction
 autocmd BufEnter * call TermInsert()
 autocmd TermOpen * setlocal nonumber
-autocmd TermOpen * startinsert
-nnoremap <silent> <C-Z> :let g:Term_InsertOnEnter=0<CR><C-w>t
+"autocmd TermOpen * startinsert
+nnoremap <silent> <C-Q> :let g:Term_InsertOnEnter=1<CR><C-w>t
+nnoremap <silent> <C-Z> <C-w>t
 
 " GUI options
 set guioptions+=TLlRrBbm
