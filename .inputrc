@@ -1,0 +1,6 @@
+set editing-mode vi
+set history-preserve-point on
+set show-mode-in-prompt on
+set vi-ins-mode-string [\1\033[32m\2ins\1\033[0m\2]
+set vi-cmd-mode-string [\1\033[31m\2CMD\1\033[0m\2]
+set keyseq-timeout 5
