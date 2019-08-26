@@ -1,5 +1,8 @@
 " Percent mappings with count support
 
+" Fuck the matchit plugin
+let loaded_matchit = 1
+
 function! s:Percent(mode)
     let s:count = v:count1
     if a:mode == 'v'
