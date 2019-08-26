@@ -134,14 +134,15 @@ imap <M-j> <Esc><C-W>j
 imap <M-k> <Esc><C-W>k
 imap <M-l> <Esc><C-W>l
 " Window resizing
+" XXX flip < and > meaning from vim since my brain seems to think they have it backwards
 nmap <M-_> <C-W>-
 nmap <M-+> <C-W>+
-nmap <M-<> <C-W><
-nmap <M->> <C-W>>
+nmap <M->> <C-W><
+nmap <M-<> <C-W>>
 nmap <M--> 6<C-W>-
 nmap <M-=> 6<C-W>+
-nmap <M-.> 6<C-W><
-nmap <M-,> 6<C-W>>
+nmap <M-,> 6<C-W><
+nmap <M-.> 6<C-W>>
 
 nmap <M-i> gT
 tmap <M-i> <C-x>gT
