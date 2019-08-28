@@ -37,7 +37,7 @@ autocmd!
 set rtp+=/usr/local/opt/fzf
 " Linux
 set rtp+=/usr/share/doc/fzf/examples
-set rtp+=~/prog/fzf.vim/
+set rtp+=~/.nvim/ext/fzf.vim/
 
 " Why aren't these happening in the above bundles?
 au BufRead,BufNewFile *.rs set filetype=rust
