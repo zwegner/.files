@@ -90,6 +90,8 @@ nmap Y y$
 nmap ! :noh<CR>
 " zq opens up the function with the line we're in.
 nnoremap zq zCzO
+" Open up folds when jumping to a line
+nmap G GzO
 " Insert one character with U (or append with Q, or append at end of line with K
 nnoremap <silent> U :exec "normal i".nr2char(getchar())."\e"<CR>
 nnoremap <silent> Q :exec "normal a".nr2char(getchar())."\e"<CR>
