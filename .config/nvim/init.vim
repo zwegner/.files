@@ -147,19 +147,19 @@ nmap <M-,> 6<C-W><
 nmap <M-.> 6<C-W>>
 
 nmap <M-i> gT
-tmap <M-i> <C-x>gT
+tmap <M-i> <M-x>gT
 imap <M-i> <Esc>gT
 nmap <M-o> gt
-tmap <M-o> <C-x>gt
+tmap <M-o> <M-x>gt
 imap <M-o> <Esc>gt
 nmap <M-p> :tabe<CR>
-tmap <M-p> <C-x>:tabe<CR>
+tmap <M-p> <M-x>:tabe<CR>
 imap <M-p> <Esc>:tabe<CR>
 nmap <M-S-i> :tabm -<CR>
-tmap <M-S-i> <C-x>:tabm -<CR>
+tmap <M-S-i> <M-x>:tabm -<CR>
 imap <M-S-i> <Esc>:tabm -<CR>
 nmap <M-S-o> :tabm +<CR>
-tmap <M-S-o> <C-x>:tabm +<CR>
+tmap <M-S-o> <M-x>:tabm +<CR>
 imap <M-S-o> <Esc>:tabm +<CR>
 
 " Command line stuff
@@ -196,28 +196,32 @@ runtime plugin/substitute.vim
 nnoremap <Leader>e :terminal bash -l<CR>
 
 tmap <C-x> <C-\><C-N>
-tmap <C-w> <C-x><C-w>
-tmap <C-a> <C-x><C-a>
+tmap <silent> <M-x> <C-x>:let b:Term_InsertOnEnter=1<CR>
+tmap <C-w> <M-x><C-w>
+tmap <C-a> <M-x><C-a>
 tnoremap <C-v><C-v> <C-v>
+tnoremap <C-v><C-w> <C-w>
+tnoremap <C-v><C-a> <C-a>
 tnoremap <C-v><C-x> <C-x>
 
 let g:terminal_scrollback_buffer_size=100000
 
-let g:Term_InsertOnEnter=1
+let g:Term_NoInsertOnEnter=0
 
 function! TermInsert()
     if exists("b:terminal_job_id")
-        if g:Term_InsertOnEnter == 1 || (exists("b:Term_InsertOnEnter") && b:Term_InsertOnEnter == 1)
+        if g:Term_NoInsertOnEnter == 0 && (!exists("b:Term_InsertOnEnter") || b:Term_InsertOnEnter == 1)
             startinsert
         endif
-        let g:Term_InsertOnEnter=0
+        let b:Term_InsertOnEnter=0
+        let g:Term_NoInsertOnEnter=0
     endif
 endfunction
+
 autocmd BufEnter * call TermInsert()
 autocmd TermOpen * setlocal nonumber
-"autocmd TermOpen * startinsert
-nnoremap <silent> <C-Q> :let g:Term_InsertOnEnter=1<CR><C-w>t
-nnoremap <silent> <C-Z> <C-w>t
+nnoremap <silent> <C-Z> :let g:Term_NoInsertOnEnter=1<CR><C-w>t
+nnoremap <silent> <C-Q> <C-w>t
 
 " GUI options
 set guioptions+=TLlRrBbm
