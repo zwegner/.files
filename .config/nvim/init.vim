@@ -259,6 +259,9 @@ hi lCursor ctermbg=White
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
+" Ctags baby
+set tags=./tags,tags,src/tags
+
 "if filereadable(".vimrclocal")
 "	source .vimrclocal
 "endif
