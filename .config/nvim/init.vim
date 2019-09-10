@@ -236,7 +236,7 @@ hi Cursor ctermbg=White
 hi DiffAdd ctermbg=Blue
 hi DiffChange ctermbg=Magenta
 hi DiffDelete ctermbg=Cyan
-hi Folded ctermfg=Black ctermbg=Gray
+hi Folded ctermfg=Black ctermbg=DarkGray
 hi Identifier ctermfg=51
 hi LineNr ctermfg=Yellow ctermbg=237
 hi MoreMsg ctermfg=Green
@@ -247,7 +247,7 @@ hi Special ctermfg=Red
 hi SpecialKey ctermfg=Blue
 hi Statement ctermfg=LightGreen gui=NONE
 hi StatusLine ctermfg=DarkBlue ctermbg=White
-hi StatusLineNC ctermfg=LightGrey ctermbg=Black
+hi StatusLineNC ctermfg=White ctermbg=Black
 hi String ctermfg=Red ctermbg=233
 hi Todo ctermfg=Black
 hi Type ctermfg=Green
