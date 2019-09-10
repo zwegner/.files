@@ -15,7 +15,7 @@ alias dud='python3 ~/prog/utils/dud.py'
 alias dh='df -h'
 alias vim='nvim'
 alias python='python3'
-alias tig='tig --all'
+alias tig='tig --branches'
 # Alembic aliases
 alias alemup='alembic upgrade head'
 alias alemdn='alembic downgrade -1'
