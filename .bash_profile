@@ -5,6 +5,8 @@ PS1='\[\e[1;32m\][\W]\$\[\e[0m\] '
 export EDITOR=nvim
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 export TIMEFORMAT="real  %3lR  (cpu=%P%%, user=%3lU, sys=%3lS)"
+# so vim clipboard works
+export DISPLAY=":0"
 
 alias ll='ls -larth'
 alias youtube-audio='youtube-dl --audio-format mp3 -x'
