@@ -1,4 +1,3 @@
-. ~/.bashrc
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 set -o vi
 PS1='\[\e[1;32m\][\W]\$\[\e[0m\] '
@@ -28,3 +27,5 @@ alias alemgen='alembic revision --autogenerate -m'
 function mdcd {
     mkdir -p "$@" && cd "$@"
 }
+
+. ~/.bashrc
