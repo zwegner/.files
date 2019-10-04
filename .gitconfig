@@ -1,0 +1,29 @@
+[user]
+    name = Zach Wegner
+    email = zwegner@gmail.com
+[alias]
+    d = diff
+    dc = diff --cached
+    ds = diff --stat
+    ci = commit
+    co = checkout
+    s = status -s
+    sn = status -s --untracked-files=no
+    l = log --format='format:%Cred%h %Cblue%an %Cgreen%ai %Creset%s'
+    lg = log --format='format:%Cred%h %Cblue%an %Cgreen%ai %Creset%s' --graph
+    rba = rebase --abort
+    rbc = rebase --continue
+    rbs = rebase --skip
+    undo = reset HEAD^
+    wip = ci -a -m 'wip'
+[push]
+    default = simple
+[branch "master"]
+    rebase = true
+[rebase]
+    autoStash = true
+    autoSquash = true
+[branch]
+    autosetuprebase = always
+[diff]
+    algorithm = histogram
