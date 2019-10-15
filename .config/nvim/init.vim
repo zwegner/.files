@@ -176,7 +176,8 @@ cnoremap <S-M-k> <S-Up>
 cnoremap <S-M-l> <S-Right>
 
 " FZF stuff
-nmap <Leader>f :Files<CR>
+nnoremap <Leader>f :GFiles<CR>
+nmap <Leader>F :Files<CR>
 nmap <Leader>b :History<CR>
 "nmap <Leader>t :BTags<CR>
 nmap <Leader>l :BLines<CR>
@@ -184,6 +185,7 @@ nmap <Leader>a :Lines<CR>
 nmap <Leader>h :Helptags!<CR>
 nmap <Leader>c :History:<CR>
 nmap <Leader>/ :History/<CR>
+nmap <Leader>g :Rg<CR>
 
 " \w - write file
 nmap <Leader>w :w<CR>
