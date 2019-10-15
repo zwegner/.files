@@ -187,6 +187,7 @@ nmap <Leader>/ :History/<CR>
 
 " \w - write file
 nmap <Leader>w :w<CR>
+nmap <Leader>q :q<CR>
 
 "command! SV so ~/.nvimrc
 "command! EV e ~/.nvimrc
