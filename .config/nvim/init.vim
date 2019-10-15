@@ -14,8 +14,9 @@ set formatoptions+=j
 set mouse=a
 set number
 set numberwidth=5
-set viminfo='1000,f1,<500,:1000,/1000
+set noequalalways
 set hlsearch
+set viminfo='1000,f1,<500,:1000,/1000
 set backupdir=~/.nvim/backup//
 set directory=~/.nvim/swap//
 set udf
