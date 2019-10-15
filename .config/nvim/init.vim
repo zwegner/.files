@@ -73,11 +73,11 @@ set foldopen-=block
 autocmd InsertEnter * setlocal foldmethod=manual
 autocmd bufread,bufnewfile,InsertLeave * setlocal foldmethod=syntax
 autocmd bufread,bufnewfile,InsertLeave *.mg,*.py,*.js,*.jsx,*.html setlocal foldmethod=indent
-autocmd FileType dot nmap <C-C> :w<CR>:!dot -Tgtk %<CR>
-autocmd FileType python nmap <C-C> :w<CR>:!python %<CR>
-autocmd filetype python nmap <Leader>C <C-J>090a#<Esc>==81\|"_Dyy2p<Right><Right>R
-autocmd filetype python nmap <Leader>d oimport pdb; pdb.set_trace()<Esc>
-autocmd filetype c,cpp nmap <Leader>C <C-J>090a/<Esc>==81\|"_Dyy2p<Right><Right>R
+autocmd FileType dot nmap <buffer> <C-C> :w<CR>:!dot -Tgtk %<CR>
+autocmd FileType python nmap <buffer> <C-C> :w<CR>:!python %<CR>
+autocmd filetype python nmap <buffer> <Leader>C <C-J>090a#<Esc>==81\|"_Dyy2p<Right><Right>R
+autocmd filetype python nmap <buffer> <Leader>d oimport pdb; pdb.set_trace()<Esc>
+autocmd filetype c,cpp nmap <buffer> <Leader>C <C-J>090a/<Esc>==81\|"_Dyy2p<Right><Right>R
 autocmd BufWinEnter * exe "normal zvzz"
 autocmd filetype htmldjango,javascript setlocal sw=2 ts=2 fdm=indent
 
