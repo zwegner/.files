@@ -70,9 +70,7 @@ command! Diff vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | difft
 " Folding
 set foldminlines=2
 set foldopen-=block
-autocmd InsertEnter * setlocal foldmethod=manual
-autocmd bufread,bufnewfile,InsertLeave * setlocal foldmethod=syntax
-autocmd bufread,bufnewfile,InsertLeave *.mg,*.py,*.js,*.jsx,*.html setlocal foldmethod=indent
+autocmd bufread,bufnewfile *.mg,*.py,*.js,*.jsx,*.html,*.lua setlocal foldmethod=indent
 autocmd FileType dot nmap <buffer> <C-C> :w<CR>:!dot -Tgtk %<CR>
 autocmd FileType python nmap <buffer> <C-C> :w<CR>:!python %<CR>
 autocmd filetype python nmap <buffer> <Leader>C <C-J>090a#<Esc>==81\|"_Dyy2p<Right><Right>R
