@@ -1,4 +1,3 @@
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 set -o vi
 PS1='\[\e[1;32m\][\W]\$\[\e[0m\] '
 export EDITOR=nvim
