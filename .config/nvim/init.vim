@@ -76,6 +76,7 @@ autocmd FileType python nmap <buffer> <C-C> :w<CR>:!python %<CR>
 autocmd filetype python nmap <buffer> <Leader>C <C-J>090a#<Esc>==81\|"_Dyy2p<Right><Right>R
 autocmd filetype python nmap <buffer> <Leader>d oimport pdb; pdb.set_trace()<Esc>
 autocmd filetype c,cpp nmap <buffer> <Leader>C <C-J>090a/<Esc>==81\|"_Dyy2p<Right><Right>R
+autocmd filetype lua nmap <buffer> <Leader>C <C-J>090a-<Esc>==81\|"_Dyy2p<Right><Right>R
 autocmd BufWinEnter * exe "normal zvzz"
 autocmd filetype htmldjango,javascript setlocal sw=2 ts=2 fdm=indent
 
@@ -88,8 +89,11 @@ nmap Y y$
 nmap ! :noh<CR>
 " zq opens up the function with the line we're in.
 nnoremap zq zCzO
+" Double C-R for inserting default register
+cnoremap <C-R><C-R> <C-R>"
+inoremap <C-R><C-R> <C-R>"
 " Open up folds when jumping to a line
-nmap G GzO
+nnoremap <silent> G GzO
 " M-BS for Del
 inoremap <M-BS>  <Del>
 cnoremap <M-BS>  <Del>
@@ -106,7 +110,7 @@ nmap <CR>	i<CR><Esc>
 " ctrl-i takes remainder of current line and moves it up
 nmap <C-I>	"zDO<Esc>"zp==
 " break a comment
-let g:break_column=119
+let g:break_column=79
 nmap <C-B> :exec "normal 0".(g:break_column)."lF r\rli\e"<CR>
 "nmap <C-B> 0119lF r<CR>li<Esc>
 " spacebar toggles folds in normal
@@ -147,6 +151,10 @@ nnoremap <M-=> 6<C-W>+
 nnoremap <M-,> 6<C-W><
 nnoremap <M-.> 6<C-W>>
 
+" Undo tree navigation
+nnoremap gb  :earlier<CR>
+nnoremap gB  :later<CR>
+
 nmap <M-i> gT
 tmap <M-i> <M-x>gT
 imap <M-i> <Esc>gT
@@ -174,8 +182,8 @@ cnoremap <S-M-k> <S-Up>
 cnoremap <S-M-l> <S-Right>
 
 " FZF stuff
-nnoremap <Leader>f :GFiles<CR>
-nmap <Leader>F :Files<CR>
+nnoremap <Leader>F :GFiles<CR>
+nnoremap <Leader>f :Files<CR>
 nmap <Leader>b :History<CR>
 "nmap <Leader>t :BTags<CR>
 nmap <Leader>l :BLines<CR>
@@ -185,9 +193,10 @@ nmap <Leader>c :History:<CR>
 nmap <Leader>/ :History/<CR>
 nmap <Leader>g :Rg<CR>
 
-" \w - write file
-nmap <Leader>w :w<CR>
-nmap <Leader>q :q<CR>
+" \w - write file, etc
+nmap <unique> <Leader>w :w<CR>
+nmap <unique> <Leader>q :q<CR>
+nmap <unique> <Leader>e :e<CR>
 
 "command! SV so ~/.nvimrc
 "command! EV e ~/.nvimrc
@@ -197,21 +206,8 @@ runtime plugin/percent.vim
 runtime plugin/substitute.vim
 
 " Terminal shiz
-nnoremap <Leader>e :terminal bash -l<CR>
-
-tmap <C-x> <C-\><C-N>
-tmap <silent> <M-x> <C-x>:let b:Term_InsertOnEnter=1<CR>
-tmap <C-w> <M-x><C-w>
-tmap <C-a> <M-x><C-a>
-tnoremap <C-v><C-v> <C-v>
-tnoremap <C-v><C-w> <C-w>
-tnoremap <C-v><C-a> <C-a>
-tnoremap <C-v><C-x> <C-x>
-
 let g:terminal_scrollback_buffer_size=100000
-
 let g:Term_NoInsertOnEnter=0
-
 function! TermInsert()
     if exists("b:terminal_job_id")
         if g:Term_NoInsertOnEnter == 0 && (!exists("b:Term_InsertOnEnter") || b:Term_InsertOnEnter == 1)
@@ -224,8 +220,20 @@ endfunction
 
 autocmd BufEnter * call TermInsert()
 autocmd TermOpen * setlocal nonumber
-nnoremap <silent> <C-Z> :let g:Term_NoInsertOnEnter=1<CR><C-w>t
-nnoremap <silent> <C-Q> <C-w>t
+
+nnoremap <unique> <Leader>t :terminal bash -l<CR>
+
+tmap <unique> <C-x> <C-\><C-N>
+tmap <unique> <C-w> <M-x><C-w>
+tmap <unique> <C-a> <M-x><C-a>
+tmap <unique> <C-q> <M-x><C-q>
+tmap <unique> <silent> <M-x> <C-x>:let b:Term_InsertOnEnter=1<CR>
+tnoremap <unique> <C-v><C-v> <C-v>
+tnoremap <unique> <C-v><C-w> <C-w>
+tnoremap <unique> <C-v><C-a> <C-a>
+tnoremap <unique> <C-v><C-x> <C-x>
+nnoremap <unique> <C-Q> <C-w>t
+nnoremap <unique> <silent> <C-Z> :let g:Term_NoInsertOnEnter=1<CR><C-w>t
 
 " GUI options
 set guioptions+=TLlRrBbm
