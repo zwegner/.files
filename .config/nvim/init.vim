@@ -242,7 +242,7 @@ set guioptions-=TLlRrBbm
 set guifont=Osaka-Mono:h14
 
 set background=dark
-hi Comment ctermfg=Magenta
+hi Comment ctermfg=69
 hi Constant ctermfg=Red
 hi Cursor ctermbg=White
 hi DiffAdd ctermbg=Blue
