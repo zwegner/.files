@@ -11,9 +11,9 @@ endif
 let g:loaded_luarefvim = 1
 
 " mappings:
-vmap <silent> <unique> <C-H> "hy:call <SID>LookUp('<c-r>h')<CR>
-nmap <silent> <unique> <C-H>  :call <SID>LookUp(expand("<cword>"))<CR>
-autocmd filetype lua map <silent> <unique> <Leader>d :help luaref<CR>
+autocmd filetype lua vnoremap <silent> <buffer> <C-H> "hy:call <SID>LookUp('<c-r>h')<CR>
+autocmd filetype lua nnoremap <silent> <buffer> <C-H>  :call <SID>LookUp(expand("<cword>"))<CR>
+autocmd filetype lua  noremap <silent> <buffer> <Leader>d :help luaref<CR>
 
 function <SID>LookUp(str)
 	if a:str == "--" "comment?
