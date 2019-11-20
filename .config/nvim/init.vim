@@ -21,6 +21,7 @@ set backupdir=~/.nvim/backup//
 set directory=~/.nvim/swap//
 set udf
 set udir=~/.nvim/undo//
+set virtualedit=block
 " Super short timeout for keycode sequences. For local development, 3ms is
 " plenty of time to send an escape code, but prevents quick <esc><key> sequences
 " from being interpreted as <meta-key>
@@ -44,24 +45,12 @@ set rtp+=~/.nvim/ext/fzf.vim/
 au BufRead,BufNewFile *.rs set filetype=rust
 autocmd! BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set filetype=glsl
 
-" Vundle sesh
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
-
-"Plugin 'rust-lang/rust.vim'
-"Plugin 'Valloric/YouCompleteMe'
-"let g:ycm_filetype_blacklist = { 'conque_term': 1 }
-
-"call vundle#end()
-
 filetype plugin indent on
 autocmd FileType text setlocal textwidth=78
 autocmd BufReadPost *
 \ if line("'\"") > 0 && line("'\"") <= line("$") |
 \   exe "normal! g`\"" |
 \ endif
-
-set virtualedit=block
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -93,7 +82,7 @@ nnoremap zq zCzO
 cnoremap <C-R><C-R> <C-R>"
 inoremap <C-R><C-R> <C-R>"
 " Open up folds when jumping to a line
-nnoremap <silent> G GzO
+nnoremap <silent> G G@=(foldlevel('.')?'zo':'')<CR>
 " M-BS for Del
 inoremap <M-BS>  <Del>
 cnoremap <M-BS>  <Del>
@@ -112,23 +101,15 @@ nmap <C-I>	"zDO<Esc>"zp==
 " break a comment
 let g:break_column=79
 nmap <C-B> :exec "normal 0".(g:break_column)."lF r\rli\e"<CR>
-"nmap <C-B> 0119lF r<CR>li<Esc>
 " spacebar toggles folds in normal
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
+
+" Undo tree navigation
+nnoremap gb  :earlier<CR>
+nnoremap gB  :later<CR>
+
 " Window stuff
 map <C-A> <C-W>p
-" nmap ˙ <C-W>h
-" nmap ∆ <C-W>j
-" nmap ˚ <C-W>k
-" nmap ¬ <C-W>l
-" tmap ˙ <C-W>h
-" tmap ∆ <C-W>j
-" tmap ˚ <C-W>k
-" tmap ¬ <C-W>l
-" imap ˙ <Esc><C-W>h
-" imap ∆ <Esc><C-W>j
-" imap ˚ <Esc><C-W>k
-" imap ¬ <Esc><C-W>l
 nmap <M-h> <C-W>h
 nmap <M-j> <C-W>j
 nmap <M-k> <C-W>k
@@ -150,10 +131,6 @@ nnoremap <M--> 6<C-W>-
 nnoremap <M-=> 6<C-W>+
 nnoremap <M-,> 6<C-W><
 nnoremap <M-.> 6<C-W>>
-
-" Undo tree navigation
-nnoremap gb  :earlier<CR>
-nnoremap gB  :later<CR>
 
 nmap <M-i> gT
 tmap <M-i> <M-x>gT
@@ -198,8 +175,8 @@ nmap <unique> <Leader>w :w<CR>
 nmap <unique> <Leader>q :q<CR>
 nmap <unique> <Leader>e :e<CR>
 
-"command! SV so ~/.nvimrc
-"command! EV e ~/.nvimrc
+command! SV so ~/.config/nvim/init.vim
+command! EV e ~/.config/nvim/init.vim
 
 " Source from plugins--just for script cleanliness
 runtime plugin/percent.vim
@@ -235,12 +212,6 @@ tnoremap <unique> <C-v><C-x> <C-x>
 nnoremap <unique> <C-Q> <C-w>t
 nnoremap <unique> <silent> <C-Z> :let g:Term_NoInsertOnEnter=1<CR><C-w>t
 
-" GUI options
-set guioptions+=TLlRrBbm
-set guioptions-=TLlRrBbm
-
-set guifont=Osaka-Mono:h14
-
 set background=dark
 hi Comment ctermfg=69
 hi Constant ctermfg=Red
@@ -273,30 +244,6 @@ autocmd GUIEnter * set visualbell t_vb=
 
 " Ctags baby
 set tags=./tags,tags,src/tags
-
-"if filereadable(".vimrclocal")
-"	source .vimrclocal
-"endif
-"
-"if filereadable("_vimrclocal")
-"	source _vimrclocal
-"endif
-
-" " cscope
-" if has("cscope")
-" 	set csprg=/usr/pkg/bin/cscope
-" 	set csto=0
-" 	set cst
-" 	set nocsverb
-" 	" add any database in current directory
-" 	if filereadable("cscope.out")
-" 		"cs add cscope.out
-" 		" else add database pointed to by environment
-" 	elseif $CSCOPE_DB != ""
-" 		cs add $CSCOPE_DB
-" 	endif
-" 	set csverb
-" endif
 
 " Go back to default autocmd group
 augroup end
