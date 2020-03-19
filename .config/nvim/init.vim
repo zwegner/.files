@@ -1,6 +1,7 @@
 set smarttab
 set nocompatible
 set nomodeline
+set nojoinspaces
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set backup		" keep a backup file
 set history=500		" keep 50 lines of command line history
@@ -44,6 +45,9 @@ set rtp+=~/.nvim/ext/fzf.vim/
 " Why aren't these happening in the above bundles?
 au BufRead,BufNewFile *.rs set filetype=rust
 autocmd! BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set filetype=glsl
+
+" Disable fucking annoying Python indenting
+let g:pyindent_disable_parentheses_indenting=1
 
 filetype plugin indent on
 autocmd FileType text setlocal textwidth=78
@@ -99,7 +103,7 @@ nmap <CR>	i<CR><Esc>
 " ctrl-i takes remainder of current line and moves it up
 nmap <C-I>	"zDO<Esc>"zp==
 " break a comment
-let g:break_column=79
+let g:break_column=81
 nmap <C-B> :exec "normal 0".(g:break_column)."lF r\rli\e"<CR>
 " spacebar toggles folds in normal
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
@@ -110,6 +114,11 @@ nnoremap gB  :later<CR>
 
 " Window stuff
 map <C-A> <C-W>p
+nnoremap <C-n> <C-W>w
+nnoremap <C-p> <C-W>W
+"tnoremap <C-n> <C-W>w
+"tnoremap <C-p> <C-W>W
+
 nmap <M-h> <C-W>h
 nmap <M-j> <C-W>j
 nmap <M-k> <C-W>k
@@ -170,6 +179,9 @@ nmap <Leader>c :History:<CR>
 nmap <Leader>/ :History/<CR>
 nmap <Leader>g :Rg<CR>
 
+command! -bang -nargs=* PyGrep :call fzf#vim#grep("rg --no-ignore-vcs --column --line-number --no-heading --color=always --smart-case " .shellescape(<q-args>), 1, {'dir': '~/doc/python-3.8.1-docs-text/library'}, <bang>0)
+nmap <Leader>p :PyGrep<CR>
+
 " \w - write file, etc
 nmap <unique> <Leader>w :w<CR>
 nmap <unique> <Leader>q :q<CR>
@@ -200,11 +212,11 @@ autocmd TermOpen * setlocal nonumber
 
 nnoremap <unique> <Leader>t :terminal bash -l<CR>
 
-tmap <unique> <C-x> <C-\><C-N>
+tnoremap <unique> <C-x> <C-\><C-N>
 tmap <unique> <C-w> <M-x><C-w>
 tmap <unique> <C-a> <M-x><C-a>
 tmap <unique> <C-q> <M-x><C-q>
-tmap <unique> <silent> <M-x> <C-x>:let b:Term_InsertOnEnter=1<CR>
+tnoremap <unique> <silent> <M-x> <C-\><C-N>:let b:Term_InsertOnEnter=1<CR>
 tnoremap <unique> <C-v><C-v> <C-v>
 tnoremap <unique> <C-v><C-w> <C-w>
 tnoremap <unique> <C-v><C-a> <C-a>
@@ -213,6 +225,9 @@ nnoremap <unique> <C-Q> <C-w>t
 nnoremap <unique> <silent> <C-Z> :let g:Term_NoInsertOnEnter=1<CR><C-w>t
 
 set background=dark
+hi Normal ctermfg=White ctermbg=Black
+"highlight NormalNC ctermbg=233
+
 hi Comment ctermfg=69
 hi Constant ctermfg=Red
 hi Cursor ctermbg=White
@@ -223,7 +238,6 @@ hi Folded ctermfg=Black ctermbg=DarkGray
 hi Identifier ctermfg=51
 hi LineNr ctermfg=Yellow ctermbg=237
 hi MoreMsg ctermfg=Green
-hi Normal ctermfg=White ctermbg=Black
 hi PreProc ctermfg=Magenta
 hi Search ctermfg=Black ctermbg=214
 hi Special ctermfg=Red
