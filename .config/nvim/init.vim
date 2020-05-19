@@ -64,6 +64,16 @@ autocmd BufReadPost *
 " file it was loaded from, thus the changes you made.
 command! Diff vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
+function! SendRunCmd()
+    let @r = "\e[A\r"
+    noautocmd wincmd t
+    normal G
+    put r
+    noautocmd wincmd p
+endfunction
+
+nmap <Leader>r :w<CR>:call SendRunCmd()<CR>
+
 " Folding
 set foldminlines=2
 set foldopen-=block
