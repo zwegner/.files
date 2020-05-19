@@ -13,7 +13,11 @@ def symlink(dir, blacklist={}):
         if f in blacklist:
             continue
         src_path = '%s/%s' % (src, f)
-        cmd = ['ln', '-s', '-T', src_path, '%s/%s' % (dst, f)]
+        dst_path = '%s/%s' % (dst, f)
+        if os.path.isdir(dst_path):
+            print('skipping', dst_path)
+            continue
+        cmd = ['ln', '-s', '-f', src_path, dst_path]
         subprocess.run(cmd)
 
 symlink('.', {'.git', 'init.py', '.config', '.nvim'})
