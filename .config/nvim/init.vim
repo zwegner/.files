@@ -72,14 +72,15 @@ function! SendRunCmd()
     noautocmd wincmd p
 endfunction
 
-nmap <Leader>r :w<CR>:call SendRunCmd()<CR>
+nmap <Leader>r :update<CR>:call SendRunCmd()<CR>
 
 " Folding
 set foldminlines=2
 set foldopen-=block
+
 autocmd bufread,bufnewfile *.mg,*.py,*.js,*.jsx,*.html,*.lua setlocal foldmethod=indent
-autocmd FileType dot nmap <buffer> <C-C> :w<CR>:!dot -Tgtk %<CR>
-autocmd FileType python nmap <buffer> <C-C> :w<CR>:!python %<CR>
+autocmd FileType dot nmap <buffer> <C-C> :update<CR>:!dot -Tgtk %<CR>
+autocmd FileType python nmap <buffer> <C-C> :update<CR>:!python3 %<CR>
 autocmd filetype python nmap <buffer> <Leader>C <C-J>090a#<Esc>==81\|"_Dyy2p<Right><Right>R
 autocmd filetype python nmap <buffer> <Leader>d oimport pdb; pdb.set_trace()<Esc>
 autocmd filetype c,cpp nmap <buffer> <Leader>C <C-J>090a/<Esc>==81\|"_Dyy2p<Right><Right>R
