@@ -29,6 +29,10 @@ set virtualedit=block
 set ttimeoutlen=3
 syntax on
 
+mapclear
+mapclear!
+tmapclear
+
 " Clear all autocommands and set a new autocmd group
 augroup zach
 autocmd!
