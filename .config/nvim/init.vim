@@ -78,15 +78,19 @@ nmap <Leader>r :update<CR>:call SendRunCmd()<CR>
 set foldminlines=2
 set foldopen-=block
 
+" Autocmds for filetype-based stuff
 autocmd bufread,bufnewfile *.mg,*.py,*.js,*.jsx,*.html,*.lua setlocal foldmethod=indent
 autocmd FileType dot nmap <buffer> <C-C> :update<CR>:!dot -Tgtk %<CR>
-autocmd FileType python nmap <buffer> <C-C> :update<CR>:!python3 %<CR>
+"autocmd FileType python nmap <buffer> <C-C> :update<CR>:!python3 %<CR>
 autocmd filetype python nmap <buffer> <Leader>C <C-J>090a#<Esc>==81\|"_Dyy2p<Right><Right>R
 autocmd filetype python nmap <buffer> <Leader>d oimport pdb; pdb.set_trace()<Esc>
 autocmd filetype c,cpp nmap <buffer> <Leader>C <C-J>090a/<Esc>==81\|"_Dyy2p<Right><Right>R
 autocmd filetype lua nmap <buffer> <Leader>C <C-J>090a-<Esc>==81\|"_Dyy2p<Right><Right>R
 autocmd BufWinEnter * exe "normal zvzz"
 autocmd filetype htmldjango,javascript setlocal sw=2 ts=2 fdm=indent
+
+" C-C in terminal enters and kills cuz I do it a million times a day
+autocmd TermOpen * nnoremap <buffer> <C-C> i<C-C>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Various key mappings...""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -123,9 +127,13 @@ nmap <C-B> :exec "normal 0".(g:break_column)."lF r\rli\e"<CR>
 " spacebar toggles folds in normal
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
 
+" quick changelist jumps
+nnoremap <silent> <M-;> g;
+nnoremap <silent> <M-,> g,
+
 " Undo tree navigation
-nnoremap gb  :earlier<CR>
-nnoremap gB  :later<CR>
+nnoremap <silent> <M-b> :earlier<CR>
+nnoremap <silent> <M-n> :later<CR>
 
 " Window stuff
 map <C-A> <C-W>p
@@ -138,10 +146,10 @@ nmap <M-h> <C-W>h
 nmap <M-j> <C-W>j
 nmap <M-k> <C-W>k
 nmap <M-l> <C-W>l
-tmap <M-h> <C-W>h
-tmap <M-j> <C-W>j
-tmap <M-k> <C-W>k
-tmap <M-l> <C-W>l
+tmap <M-h> <M-x><C-W>h
+tmap <M-j> <M-x><C-W>j
+tmap <M-k> <M-x><C-W>k
+tmap <M-l> <M-x><C-W>l
 imap <M-h> <Esc><C-W>h
 imap <M-j> <Esc><C-W>j
 imap <M-k> <Esc><C-W>k
@@ -149,12 +157,12 @@ imap <M-l> <Esc><C-W>l
 " Window resizing
 nnoremap <M-_> <C-W>-
 nnoremap <M-+> <C-W>+
-nnoremap <M-<> <C-W><
-nnoremap <M->> <C-W>>
-nnoremap <M--> 6<C-W>-
-nnoremap <M-=> 6<C-W>+
-nnoremap <M-,> 6<C-W><
-nnoremap <M-.> 6<C-W>>
+nnoremap <M-{> <C-W><
+nnoremap <M-}> <C-W>>
+nnoremap <M--> 12<C-W>-
+nnoremap <M-=> 12<C-W>+
+nnoremap <M-[> 12<C-W><
+nnoremap <M-]> 12<C-W>>
 
 nmap <M-i> gT
 tmap <M-i> <M-x>gT
