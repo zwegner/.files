@@ -5,6 +5,7 @@ export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 export TIMEFORMAT="real  %3lR  (cpu=%P%%, user=%3lU, sys=%3lS)"
 # so vim clipboard works
 export DISPLAY=":0"
+export HISTCONTROL=erasedups:ignorespace
 
 alias ll='ls -larth'
 alias youtube-audio='youtube-dl --audio-format mp3 -x'
