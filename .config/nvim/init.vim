@@ -64,15 +64,20 @@ autocmd BufReadPost *
 " file it was loaded from, thus the changes you made.
 command! Diff vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
-function! SendRunCmd()
-    let @r = "\e[A\r"
+function! SendRunCmd(ctrlc)
+    if a:ctrlc
+        let @r = "\<C-C>\r\e[A\r"
+    else
+        let @r = "\e[A\r"
+    endif
     noautocmd wincmd t
     normal G
     put r
     noautocmd wincmd p
 endfunction
 
-nmap <Leader>r :update<CR>:call SendRunCmd()<CR>
+nmap <Leader>r :update<CR>:call SendRunCmd(0)<CR>
+nmap <Leader>R :update<CR>:call SendRunCmd(1)<CR>
 
 " Folding
 set foldminlines=2
@@ -190,6 +195,7 @@ cnoremap <S-M-j> <S-Down>
 cnoremap <S-M-k> <S-Up>
 cnoremap <S-M-l> <S-Right>
 
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 " FZF stuff
 nnoremap <Leader>F :GFiles<CR>
 nnoremap <Leader>f :Files<CR>
