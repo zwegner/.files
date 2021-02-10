@@ -17,6 +17,8 @@ bind stage	2	:?^@@
 bind stage	3	:/^@@
 bind diff	2	:?^@@
 bind diff	3	:/^@@
+bind diff	{	:?^$
+bind diff	}	:/^$
 
 set diff-view	= line-number:yes,interval=1 text:yes,commit-title-overflow=no
 set stage-view	= line-number:yes,interval=1 text
