@@ -132,6 +132,10 @@ let g:break_column=81
 nmap <C-B> :exec "normal 0".(g:break_column)."lF r\rli\e"<CR>
 " spacebar toggles folds in normal
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
+" alt-y appends to unnamed register
+nmap <M-y> :let @x=@"<CR>"Xy
+omap <M-y> y
+nmap <M-S-y> :let @x=@"<CR>"Xy$
 
 " quick changelist jumps
 nnoremap <silent> <M-;> g;
