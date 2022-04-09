@@ -13,6 +13,7 @@ set sw=4
 set et
 set formatoptions+=j
 set mouse=a
+set relativenumber
 set number
 set numberwidth=5
 set noequalalways
@@ -237,7 +238,7 @@ function! TermInsert()
 endfunction
 
 autocmd BufEnter * call TermInsert()
-autocmd TermOpen * setlocal nonumber
+autocmd TermOpen * setlocal nonumber nornu
 
 nnoremap <unique> <Leader>t :terminal bash -l<CR>
 
