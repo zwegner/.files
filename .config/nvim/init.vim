@@ -67,13 +67,13 @@ command! Diff vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | difft
 
 function! SendRunCmd(ctrlc)
     if a:ctrlc
-        let @r = "\<C-C>\r\e[A\r"
+        let @r = "\<C-C>\e[A\r"
     else
         let @r = "\e[A\r"
     endif
     noautocmd wincmd t
     normal G
-    put r
+    call chansend(b:terminal_job_id, @r)
     noautocmd wincmd p
 endfunction
 
